@@ -5,21 +5,24 @@ const crypto = require('crypto')
 const cors = require('cors')
 
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3089
 
 app.use(bodyParser.json(), cors())
 app.options('*', cors());
+app.use(express.logger());
+
+
 
 app.post('/', (req, res) => {
 
   const timestamp = new Date().getTime() - 30000
-  const msg = Buffer.from(process.env.API_KEY + req.body.meetingNumber + timestamp + req.body.role).toString('base64')
-  const hash = crypto.createHmac('sha256', process.env.API_SECRET).update(msg).digest('base64')
-  const signature = Buffer.from(`${process.env.API_KEY}.${req.body.meetingNumber}.${timestamp}.${req.body.role}.${hash}`).toString('base64')
+  const msg = Buffer.from("QE2SZLhBQHK_PpP25tIzfw" + req.body.meetingNumber + timestamp + req.body.role).toString('base64')
+  const hash = crypto.createHmac('sha256',"qrwzZzp1WmPJL2hfFyOV6j8SLeDI1JBCMAVf").update(msg).digest('base64')
+  const signature = Buffer.from(`${"QE2SZLhBQHK_PpP25tIzfw"}.${req.body.meetingNumber}.${timestamp}.${req.body.role}.${hash}`).toString('base64')
 
   res.json({
     signature: signature
   })
 })
 
-app.listen(port, () => console.log(`Zoom Web SDK Sample Signature Node.js on port ${port}!`))
+app.listen( process.env.PORT, () => console.log(`Zoom Web SDK Sample Signature Node.js on port ${port}!`))
