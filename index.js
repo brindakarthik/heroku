@@ -13,5 +13,8 @@ res.send("welcome to KB")
 })
 
 
+var server = app.listen(process.env.PORT || 5000, function () {
+ 
+  console.log("Express is working on port ");
+});
 
-app.listen( process.env.PORT|3089)
