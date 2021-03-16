@@ -8,7 +8,7 @@ const cors = require('cors')
 const app = express()
 
 app.get('/', (req, res) => {
-res.send("welcome to OA")
+res.send("welcome to KB")
 
 })
 
