@@ -6,10 +6,13 @@ const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 3089
+app.use(bodyParser.json(), cors())
+app.options('*', cors());
+app.use(express.logger());
+app.get('/', (req, res) => {
+res.send("welcome to OA")
 
-
-
-
+})
 
 app.post('/', (req, res) => {
 
