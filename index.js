@@ -8,6 +8,8 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.options('*', cors());
+
+app.use(cors());
 app.post('/', (req, res) => {
 
   const timestamp = new Date().getTime() - 30000
